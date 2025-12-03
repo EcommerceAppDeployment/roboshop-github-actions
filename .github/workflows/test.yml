@@ -7,40 +7,41 @@ on:
 jobs:
   java:
     runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'java'}} 
+    if : ${{ inputs.app_type == 'java' }} 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
 
-      - name: build java
+      - name: Test java
         run: |
-          mvn package
-# python and node js does not require any build as  they are interpreter languages
-  python:
-    runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'python'}} 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Checks out the repository code
+          echo mvn test 
 
-      - name: build python
-        run: echo building python
   nodejs:
     runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'nodejs'}} 
+    if : ${{ inputs.app_type == 'nodejs' }} 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
 
-      - name: build nodejs
-        run: echo building nodejs
-  go:
+      - name: tests nodejs
+        run: echo npm test
+
+  python:
     runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'go'}} 
+    if : ${{ inputs.app_type == 'python' }} 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
 
-      - name: build go
-        run: go build
+      - name: test python
+        run: echo python -m unittest test-cases.py
 
+  go:
+    runs-on: self-hosted
+    if : ${{ inputs.app_type == 'go' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: Test java
+        run: echo go test
