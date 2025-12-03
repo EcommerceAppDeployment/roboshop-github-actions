@@ -10,10 +10,9 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted # Specifies the runner environment
     uses: EcommerceAppDeployment/roboshop-github-actions/.github/workflows/ci_build.yml@main
     with:
-      app_type: inputs.app_type
+      app_type: ${{ inputs.app_type }}
         
   test:
     needs: build

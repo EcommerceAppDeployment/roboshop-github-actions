@@ -5,8 +5,13 @@ on:
         required: true
         type: string
 jobs:
-  if inputs.app_type== "nodejs":
-  steps:
-    - name: build nodejs
-      run: echo building nodejs
+  nodejs:
+    runs-on: self-hosted # Specifies the runner environment    
+    if "${{ inputs.app_type }}" == "nodejs":
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: build nodejs
+        run: echo building nodejs
 
