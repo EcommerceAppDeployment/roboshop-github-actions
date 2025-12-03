@@ -11,9 +11,9 @@ jobs:
 
       - name : Run a line script
         run: echo Hello world
-        
+
   test:
-    runs_on: self-hosted
+    runs-on: self-hosted
     steps:
       - name: Run tests
         run: echo 'running tests' # Example: Run tests
