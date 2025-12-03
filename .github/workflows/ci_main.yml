@@ -25,7 +25,7 @@ jobs:
   qa-deploy:
     needs: test
     runs-on: self-hosted
-    env: qa
+    environment: qa
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
@@ -36,7 +36,7 @@ jobs:
   uat-deploy:
     needs: qa-deploy
     runs-on: self-hosted
-    env: uat
+    environment: uat
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
@@ -47,7 +47,7 @@ jobs:
   prod-deploy:
     needs: uat-deploy
     runs-on: self-hosted
-    env: prod
+    environment: prod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
