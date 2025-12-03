@@ -1,0 +1,22 @@
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: self-hosted # Specifies the runner environment
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name : Run a line script
+        run: echo Hello world
+        
+  test:
+    runs_on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: Run tests
+        run: echo 'running tests' # Example: Run tests
