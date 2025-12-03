@@ -6,42 +6,46 @@ on:
         type: string
 jobs:
   nginx:
-    runs-on: self-hosted # Specifies the runner environment 
-    if : ${{ inputs.app_type == 'nginx'}}    
+    runs-on: self-hosted # Specifies the runner environment     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
 
+      - name: download dependencies
+        run: |
+          if [ '${{ inputs.app_type }}' == 'nginx'] ; then
+            mvn package
+          fi
       - name: Docker build
         run: |
           docker build .
 
 # python and node js does not require any build as  they are interpreter languages
-  python:
-    runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'python'}} 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Checks out the repository code
+  # python:
+  #   runs-on: self-hosted # Specifies the runner environment    
+  #   if : ${{ inputs.app_type == 'python'}} 
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4 # Checks out the repository code
 
-      - name: build python
-        run: echo building python
-  nodejs:
-    runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'nodejs'}} 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Checks out the repository code
+  #     - name: build python
+  #       run: echo building python
+  # nodejs:
+  #   runs-on: self-hosted # Specifies the runner environment    
+  #   if : ${{ inputs.app_type == 'nodejs'}} 
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4 # Checks out the repository code
 
-      - name: build nodejs
-        run: echo building nodejs
-  go:
-    runs-on: self-hosted # Specifies the runner environment    
-    if : ${{ inputs.app_type == 'go'}} 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Checks out the repository code
+  #     - name: build nodejs
+  #       run: echo building nodejs
+  # go:
+  #   runs-on: self-hosted # Specifies the runner environment    
+  #   if : ${{ inputs.app_type == 'go'}} 
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4 # Checks out the repository code
 
-      - name: build go
-        run: go build
+  #     - name: build go
+  #       run: go build
 
