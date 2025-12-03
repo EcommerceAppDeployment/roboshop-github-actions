@@ -14,4 +14,34 @@ jobs:
 
       - name: build nodejs
         run: echo building nodejs
+  
+  java:
+    runs-on: self-hosted # Specifies the runner environment    
+    if : ${{ inputs.app_type == 'java'}} 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: build java
+        run: echo building java
+
+  python:
+    runs-on: self-hosted # Specifies the runner environment    
+    if : ${{ inputs.app_type == 'python'}} 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: build python
+        run: echo building python
+
+  go:
+    runs-on: self-hosted # Specifies the runner environment    
+    if : ${{ inputs.app_type == 'go'}} 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: build go
+        run: echo building go
 
