@@ -6,19 +6,29 @@ on:
         type: string
 jobs:
   nginx:
-    runs-on: self-hosted # Specifies the runner environment     
+    runs-on: self-hosted # Specifies the runner environment  
+    if : ${{ inputs.app_type == 'nginx'}}   
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
-
-      - name: download dependencies
-        run: |
-          if [ '${{ inputs.app_type }}' == 'nginx'] ; then
-            mvn package
-          fi
       - name: Docker build
         run: |
           docker build .
+
+  # nginx:
+  #   runs-on: self-hosted # Specifies the runner environment     
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4 # Checks out the repository code
+
+  #     - name: download dependencies
+  #       run: |
+  #         if [ '${{ inputs.app_type }}' == 'nginx'] ; then
+  #           mvn package
+  #         fi
+  #     - name: Docker build
+  #       run: |
+  #         docker build .
 
 # python and node js does not require any build as  they are interpreter languages
   # python:

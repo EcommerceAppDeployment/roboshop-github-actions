@@ -5,6 +5,16 @@ on:
         required: true
         type: string
 jobs:
+  nginx:
+    runs-on: self-hosted # Specifies the runner environment    
+    if : ${{ inputs.app_type == 'nginx' }} 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out the repository code
+
+      - name: Test nginx
+        run: |
+          echo nginx test 
   java:
     runs-on: self-hosted # Specifies the runner environment    
     if : ${{ inputs.app_type == 'java' }} 
