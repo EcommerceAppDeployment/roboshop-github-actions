@@ -7,7 +7,7 @@ on:
 jobs:
   nodejs:
     runs-on: self-hosted # Specifies the runner environment    
-    if ${{ inputs.app_type }} == "nodejs":
+    if : ${{ inputs.app_type == "nodejs"}} 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
