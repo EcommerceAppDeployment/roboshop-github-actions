@@ -5,23 +5,16 @@ on:
         required: true
         type: string
 jobs:
-  docker-build-push:
-    runs-on: self-hosted # Specifies the runner environment    
+  nginx:
+    runs-on: self-hosted # Specifies the runner environment 
+    if : ${{ inputs.app_type == 'nginx'}}    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out the repository code
 
       - name: Docker build
         run: |
-          # if [ "${{inputs.app_type}}" == "java" ]; then
-          #   mvn package
-          # fi
-          # if [ "${{inputs.app_type}}" == "nodejs" ]; then
-          #   npm install
-          # fi
-          if [ "${{ inputs.app_type }}" == "nginx" ]; then
-            docker build .
-          fi
+          docker build .
 
 # python and node js does not require any build as  they are interpreter languages
   python:
