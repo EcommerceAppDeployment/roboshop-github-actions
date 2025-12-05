@@ -4,6 +4,9 @@ on:
       app_type:
         required: true
         type: string
+      app_name:
+        required: true
+        type: string
 jobs:
   docker-build-push:
     runs-on: self-hosted # Specifies the runner environment     
@@ -19,6 +22,14 @@ jobs:
           if [ '${{ inputs.app_type }}' == 'go'] ; then
             go build
           fi
-      - name: Docker build
+      - name: Docker login
         run: |
-          docker build .
+          /usr/local/bin/aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533567530972.dkr.ecr.us-east-1.amazonaws.com
+          
+      - name: Docker build
+        run : |
+          docker build -t 533567530972.dkr.ecr.us-east-1.amazonaws.com/${{inputs.app_name}}:latest .
+
+      - name: Docker push
+        run : |
+          docker push 533567530972.dkr.ecr.us-east-1.amazonaws.com/${{inputs.app_name}}:latest
